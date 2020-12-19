@@ -5,7 +5,7 @@
 #  Current as of 15 Dec 2020  #
 #                             #
 ###############################
-
+clear
 # Setting colors for results
     SUCCESSCOLOR=$'\033[32;1m'
     FAILCOLOR=$'\033[33;1m'
@@ -20,6 +20,7 @@
     redirect="redirect-test"
     success="printf "$SUCCESSCOLOR""Success!\\n""$ENDCOLOR""
     failure="printf "$FAILCOLOR""Fail\\n""$ENDCOLOR""
+    ip='192.168.1.157'
     
 # Creating a function to check system uptime
 #timeUp() { [[ $(uptime -p | grep -Ev "day[s]*|hour[s]*" | awk '{print $2}') -eq null ]] && echo reboot || echo Good ; }
@@ -33,9 +34,16 @@ printf "loading..."
 sleep 3
 
 # RH-CSA-1
-
+printf "\rChecking \033[34;1mRH-CSA-1\033[0m now...\n"
+scp -q files/rh-csa-1.sh $ip:/tmp
+ssh $ip "/bin/bash /tmp/rh-csa-1.sh"
+ssh $ip "/bin/bash rm -f /tmp/rh-csa-1.sh"
 
 # RH-CSA-2
+printf "\n\nChecking \033[34;1mRH-CSA-2\033[0m now...\n"
+scp -q files/rh-csa-2.sh $ip:/tmp
+ssh $ip "/bin/bash /tmp/rh-csa-2.sh"
+ssh $ip "/bin/bash rm -f /tmp/rh-csa-2.sh"
 
 # End warning & comments
 printf "\n\t$FAILCOLOR""WARNING!""$ENDCOLOR"
