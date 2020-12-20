@@ -9,7 +9,7 @@
         - dd if=/dev/zero of=/dev/null &
   - Add three spare hdds to RH-CSA-2
   
-  - Create "rhat" user on RH-Wkstn
+  - Create "rhat" user on RH-Wkstn, passwd rhat to Redhat123
 
   - RH-CSA-1 should have a bad root password of NotAgoodOne
   - RH-CSA-2 root password is Redhat123
@@ -23,4 +23,7 @@
 
   - Install httpd on RH-CSA-2
   - Set httpd to use /newsite as root directory
+      - /etc/httpd/conf/httpd.conf
+          - DocumentRoot "/newsite"
+          - <Directory "/newsite">     # under "Further relax access to the default document root"
   - Set selinux contexts to be default_t for /newsite/index.html
