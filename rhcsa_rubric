@@ -6,8 +6,8 @@ System Information:
     - Root password
     - Bad ssh key
 
-System Configuration
 
+ACTIONS TO PERFORM:
   - Common Configurations for both servers:
         - Network interfaces need to be configured
         - Root password needs to be set to Redhat123
