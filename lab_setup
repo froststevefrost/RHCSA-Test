@@ -17,10 +17,15 @@
   - RH-CSA-1 should boot into graphical.target
     - systemctl set-default graphical.target
   - RH-CSA-2 should have a corrupt fstab
-    - fstab:  BadDriveLine /fake/drive  /fake/mount nfs defaults    0 0 
+  ```
+  fstab:  BadDriveLine /fake/drive  /fake/mount nfs defaults    0 0 
+  ```
 
   - Set timezone to America/Jamaica on both
 
   - create index.html on RH-CSA-2
-    - tar -cvjf containers.tar.bzip2 index.html
-    - rm index.html
+   ```
+   # echo "This is the content of the web server. Congrats!" > index.html
+   # tar -cvjf containers.tar.bzip2 index.html
+   # rm index.html
+   ```
