@@ -58,10 +58,14 @@ Everything Else
   - On RH-CSA-2:
         - Create a PV, VG, and LV using /dev/sdb 
             - name should be "myVg" for the VG and "myLv" for the LV
+            - LV should only be 500MiB
+            - mounted to /data/lv
         - Should be able to create a VDO on /dev/sdc
-            - future release
+            - name should be myVdo
+            - mounted to /data/vdo
         - Should be able to create a pool w/ stratis on /dev/sdd.
             - Should have the name "stratis" in it
+            - mounted to /data/stratis
         - Make a new directory named /home/$username/shares
         - Set a file access control list on /home/$username/shares to set defaults where $username has rw- perms for new files
 
