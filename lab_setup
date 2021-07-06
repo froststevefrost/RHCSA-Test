@@ -2,11 +2,11 @@
   - RH-Wkstn, RH-CSA-1, and RH-CSA-2 
 
   - Set grub time out to be longer to make it easier to fix issues
-        - sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/' /etc/default/grub
-        - grub2-mkconfig -o /boot/grub2/grub.cfg
+    - sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/' /etc/default/grub
+    - grub2-mkconfig -o /boot/grub2/grub.cfg
   
   - Create a CPU hog on RH-CSA-1
-        - dd if=/dev/zero of=/dev/null &
+    - dd if=/dev/zero of=/dev/null &
   - Add three spare hdds to RH-CSA-2
   
   - Create "rhat" user on RH-Wkstn, passwd rhat to Redhat123
@@ -14,16 +14,13 @@
   - RH-CSA-1 should have a bad root password of NotAgoodOne
   - RH-CSA-2 root password is Redhat123
 
-  - RH-CSA-1 should boot into multi-user.target
-        - systemctl set-default multi-user.target
+  - RH-CSA-1 should boot into graphical.target
+    - systemctl set-default graphical.target
   - RH-CSA-2 should have a corrupt fstab
-        - fstab:  BadDriveLine /fake/drive  /fake/mount nfs defaults    0 0 
+    - fstab:  BadDriveLine /fake/drive  /fake/mount nfs defaults    0 0 
 
   - Set timezone to America/Jamaica on both
 
-  - Install httpd on RH-CSA-2
-  - Set httpd to use /newsite as root directory
-      - /etc/httpd/conf/httpd.conf
-          - DocumentRoot "/newsite"
-          - <Directory "/newsite">     # under "Further relax access to the default document root"
-  - Set selinux contexts to be default_t for /newsite/index.html
+  - create index.html on RH-CSA-2
+    - tar -cvjf containers.tar.bzip2 index.html
+    - rm index.html
