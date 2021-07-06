@@ -16,33 +16,26 @@ System Configuration
         - Set ntp to run correctly
         
         - create user "rhat" w/ password to Redhat123
-        - grant the "rhat" user sudo rights
+        - grant the "rhat" user sudo rights w/ no prompt for password
         - Create new ssh keys for "rhat" user on RH-Wkstn
+        - Configure RH-CSA-1 and RH-CSA-2 so that the rhat user is able to ssh without being prompted for a password
         - Set /etc/ssh/sshd_config to disallow PasswordAuthentication and enforce PubKeyAuthentication
-        - Configure RH-CSA-1 and RH-CSA-2 so that the rhat user is able to ssh without a password
         
-        - Set each server's hostnames to reflect names in vCenter
+        - Set each server's hostnames
         - Configure /etc/hosts to have the three systems defined on each server
 
-        - yum.repos.d/redhat.repo should be configured to use RHSAT for both servers
+        - yum.repos.d/MyAppStream.repo should be configured to use the install disk's AppStream directory as a repo
+        - yum.repos.d/MyBaseOS.repo should be configured to use the install disk's BaseOS directory as a repo
+        - both repositories should be enabled with no gpg key 
 
-Archive, copy, & redirection
-  - On RH-CSA-1:
-        - Archive the /home/$username/.bashrc and name it archive.zip
-        - Transfer archive.zip from RH-CSA-1 to RH-CSA-2
-
-  - On RH-CSA-2:
-        - Unzip archive.zip into home dir, name the extracted file "archive.txt"
-        - Change perms of archive.txt to 0440
-        - Redirect the first 5 lines of archive.txt into a new file named "redirect-test"
-        - Append the last 2 lines of archive.txt into the same file without overwriting
-
-Everything Else
   - On RH-CSA-1:
         - Fix the process that is taking up CPU resources
-
+        
         - Set default password age to be 90 days
-        - Set $username's password to expire in 55 days from today
+        - Set $username's account to expire in 55 days from today
+
+        - Archive the /etc/services and name it archive.tar.bzip2
+        - Transfer archive.tar.bzip2 from RH-CSA-1 to rhat's home directory on RH-CSA-2
 
         - Create a cron job for user "rhat" to run at 13 minutes past every hour that logs "Cron job ran at $(date)" to /var/log/messages
 
@@ -53,25 +46,35 @@ Everything Else
 
         - Make a new dir named /home/$user/test and create 99 directories in there named dir1 through dir99 that have 99 files in each that are named file1 through file99
 
-        - Set the tuning profile to Virtual Guest on RH-CSA-1
+        - Set the tuning profile to Virtual Guest
+        
+        - Create a container 
+            As the rhat user, create a detached apache http web server container with the name "site1" and with the tag that has the lowest version (aside from version "1") from rhel8/httpd-24 image. 
+            Use the registry.redhat.io registry, using your access.redhat.com username and password for the login
+            Use the username "administrator" and the password of "admin123". Set them using the variables HTTPD_USER and HTTPD_PASSWORD
+            Create and mount the ~/storage/html/ directory as a persistent storage to the container as /var/www/html. The contents of ~/storage/html should be extracted from /root/containers.tar.xz
+            Also, port 8080 on the container should be mapped to port 8080 on the host.
+            Make the web server/container persistent across reboots.
+            You should be able to curl the website from any system on the local intranet.
 
   - On RH-CSA-2:
+        - Unzip ~/archive.tar.bzip2 into home dir, name the extracted file "sys_svcs"
+        - Change perms of sys_svcs to 0440
+        - Redirect the first 5 lines of sys_svcs into a new file named "redirect-test"
+        - Append the last 2 lines of sys_svcs into the same file without overwriting
+        
         - Create a PV, VG, and LV using /dev/sdb 
             - name should be "myVg" for the VG and "myLv" for the LV
             - LV should only be 500MiB
-            - mounted to /data/lv
+            - mounted to /data/lv using UUID
         - Should be able to create a VDO on /dev/sdc
             - name should be myVdo
-            - mounted to /data/vdo
+            - mounted to /data/vdo using UUID
         - Should be able to create a pool w/ stratis on /dev/sdd.
             - Should have the name "stratis" in it
-            - mounted to /data/stratis
+            - mounted to /data/stratis using label
         - Make a new directory named /home/$username/shares
         - Set a file access control list on /home/$username/shares to set defaults where $username has rw- perms for new files
 
-        - Fix SELinux contexts on /newsite to figure out why httpd won't work
-        - Start httpd and enable it to start at boot up
-        - Firewall should block all traffic except for SSH and HTTP.
-
         - Set the journactl logs to be persistent
-        - Configure syslog to log debug messages to /var/log/debug.log
+        - Configure syslog to log all debug messages to /var/log/debug.log
