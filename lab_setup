@@ -28,6 +28,9 @@
 
   - Set timezone to America/Jamaica on both
      # timedatectl set-timezone America/Jamaica
+     
+  - Set RH-CSA-1 to be "Desktop"
+     # tuned-adm profile desktop
 
   - create index.html on RH-CSA-2
      # echo "This is the content of the web server. Congrats!" > index.html
