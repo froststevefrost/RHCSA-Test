@@ -62,7 +62,7 @@ These files are untested and should be considered as an "alpha" release. Use at 
 # timedatectl set-timezone America/Jamaica
 ```
 
-#### Set RH-CSA-1 to be "Desktop":
+#### Set RH-CSA-1's tuned profile to be "Desktop":
 ```
 # tuned-adm profile desktop
 ```
