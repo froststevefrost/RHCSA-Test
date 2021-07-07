@@ -17,9 +17,9 @@ Lab Setup:
 Create three vms:
 ^^^^^^^^^^^^^^^^^
 
-  - RH-Wkstn (Workstation w/ GUI)
-  - RH-CSA-1 (Server w/ no GUI)
-  - RH-CSA-2 (Server w/ no GUI)
+- RH-Wkstn (Workstation w/ GUI)
+- RH-CSA-1 (Server w/ no GUI)
+- RH-CSA-2 (Server w/ no GUI)
 
 #### Set grub time out to be longer on the two serversto make it easier to fix issues:
 ```
