@@ -2,9 +2,12 @@
   - RH-Wkstn, RH-CSA-1, and RH-CSA-2 
 
   - Set grub time out to be longer to make it easier to fix issues
-     # sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/' /etc/default/grub
-     # grub2-mkconfig -o /boot/grub2/grub.cfg
-  
+
+```
+# sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/' /etc/default/grub
+# grub2-mkconfig -o /boot/grub2/grub.cfg
+```
+
   - Create a CPU hog on RH-CSA-1
      # dd if=/dev/zero of=/dev/null &
      
