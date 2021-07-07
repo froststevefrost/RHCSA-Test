@@ -13,6 +13,7 @@ RHCSA-Test
 
 Lab Setup:
 ----------
+Follow these steps to set up the environment.
 
 Create three vms:
 ^^^^^^^^^^^^^^^^^
