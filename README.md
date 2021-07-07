@@ -11,7 +11,7 @@ Follow the instructions in the file "rhcsa_rubric".
 
 These files are untested and should be considered as an "alpha" release. Use at your own risk.
 
-## Lab Setup:
+# Lab Setup:
 
 #### Create three vms:
 
@@ -19,7 +19,7 @@ These files are untested and should be considered as an "alpha" release. Use at 
   - RH-CSA-1 (Server w/ no GUI)
   - RH-CSA-2 (Server w/ no GUI)
 
-#### Set grub time out to be longer on the two servers to make it easier to fix issues:
+#### Set grub time out to be longer on the two serversto make it easier to fix issues:
 ```
 # sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/' /etc/default/grub
 # grub2-mkconfig -o /boot/grub2/grub.cfg
@@ -54,7 +54,7 @@ These files are untested and should be considered as an "alpha" release. Use at 
 
 #### RH-CSA-2 should have a corrupt fstab:
 ```
-# echo '/fake/drive  /fake/mount nfs defaults    0 0' >> /etc/fstab
+# echo 'BadDriveLine /fake/drive  /fake/mount nfs defaults    0 0' >> /etc/fstab
 ```
 
 #### Set timezone to America/Jamaica on both:
@@ -62,14 +62,29 @@ These files are untested and should be considered as an "alpha" release. Use at 
 # timedatectl set-timezone America/Jamaica
 ```
 
-#### Set RH-CSA-1's tuned profile to be "Desktop":
+#### Set RH-CSA-1 to be "Desktop":
 ```
 # tuned-adm profile desktop
 ```
 
-#### create index.html on RH-CSA-2:
+#### Create index.html on RH-CSA-2:
 ``` 
 # echo "This is the content of the web server. Congrats!" > index.html
 # tar -cvjf containers.tar.bzip2 index.html
 # rm index.html
+```
+
+#### Ensure the IP settings are reverted back to null:
+```
+nmtui
+```
+
+#### Remove all traces of history:
+```
+# su - rhat
+$ rm -rvf ~/.bash_history
+$ history -c
+$ exit
+# rm -rvf /root/.bash_history
+# history -c
 ```
