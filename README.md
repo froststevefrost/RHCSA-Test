@@ -54,7 +54,7 @@ These files are untested and should be considered as an "alpha" release. Use at 
 
 #### RH-CSA-2 should have a corrupt fstab:
 ```
-# echo 'BadDriveLine /fake/drive  /fake/mount nfs defaults    0 0' >> /etc/fstab
+# echo '/fake/drive  /fake/mount nfs defaults    0 0' >> /etc/fstab
 ```
 
 #### Set timezone to America/Jamaica on both:
