@@ -11,7 +11,7 @@ Follow the instructions in the file "rhcsa_rubric".
 
 These files are untested and should be considered as an "alpha" release. Use at your own risk.
 
-# Lab Setup:
+## Lab Setup:
 
 #### Create three vms:
 
