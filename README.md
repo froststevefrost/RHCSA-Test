@@ -19,7 +19,7 @@ These files are untested and should be considered as an "alpha" release. Use at 
   - RH-CSA-1 (Server w/ no GUI)
   - RH-CSA-2 (Server w/ no GUI)
 
-#### Set grub time out to be longer on the two serversto make it easier to fix issues:
+#### Set grub time out to be longer on the two servers to make it easier to fix issues:
 ```
 # sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/' /etc/default/grub
 # grub2-mkconfig -o /boot/grub2/grub.cfg
